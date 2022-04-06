@@ -1,0 +1,23 @@
+// This file contains messages related to tracing requests made with grpc.
+
+// current maintainers:
+// Finch - finch@petland.com
+
+syntax = "proto3";
+
+package petland.tracing.v1;
+
+import "google/type/datetime.proto";
+
+// Default standard tracing information for every request sent via grpc.enum
+// Unless otherwise stated this should be added to every request grpc object.
+message TracingInformation {
+    // The trace id of the request. This should be a uuid in v4 format.
+    string trace_id = 1;
+
+    // A timestamp representing the time the request was made.
+    google.type.DateTime timestamp = 2;
+
+    // The number of times the request has been attempted
+    uint32 attempts = 3;
+}

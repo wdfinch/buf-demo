@@ -1,3 +1,2 @@
-syntax = "proto3";
-
-package petland.dog.v1beta;
+// The dog api is used to tranfer and modify information about dogs at petland.
+// Dogs no longer at petland will not be accesible via the API.

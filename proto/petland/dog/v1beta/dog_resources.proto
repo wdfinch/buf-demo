@@ -1,36 +1,39 @@
 // The messages in this file describe the interfaces used in the dog api.
-// See dog_resources for more details regarding the api. 
+// See dog_resources for more details regarding the api.
 
 // current maintainers:
-// finch - finch@petland.com
+// Finch - finch@petland.com
 
 syntax = "proto3";
 
 package petland.dog.v1beta;
 
 import "google/type/date.proto";
+import "google/type/money.proto";
+import "google/type/postal_address.proto";
+import "google/type/phone_number.proto";
 
 enum Breed {
-    // The user did not specify the breed. Do not use.
-    BREED_UNSPECIFIED = 0;
+  // The user did not specify the breed. Do not use.
+  BREED_UNSPECIFIED = 0;
 
-    // The golden retriever dog breed.
-    BREED_GOLDEN_RETRIEVER = 1;
+  // The golden retriever dog breed.
+  BREED_GOLDEN_RETRIEVER = 1;
 
-    // The grey hound dog breed.
-    BREED_GREYHOUND = 2;
+  // The grey hound dog breed.
+  BREED_GREYHOUND = 2;
 
-    // The flat coated retriever dog breed.
-    BREED_FLAT_COATED_RETRIEVER = 3;
+  // The flat coated retriever dog breed.
+  BREED_FLAT_COATED_RETRIEVER = 3;
 
-    // The pug dog breed.
-    BREED_PUG = 4;
+  // The pug dog breed.
+  BREED_PUG = 4;
 
-    // The bull dog breed.
-    BREED_BULLDOG = 5;
+  // The bull dog breed.
+  BREED_BULLDOG = 5;
 
-    // An unknow dog breed.
-    BREED_UNKNOWN = 6;
+  // An unknow dog breed.
+  BREED_UNKNOWN = 6;
 }
 
 // A dog message contains all the information related to a dog at pet land.
@@ -39,40 +42,43 @@ message Dog {
   string id = 1;
 
   // The name of the dog. Note this is not unique.
-  // Names must be one word and begin with an uppcase letter. 
-  // No punctuation is allowed. 
+  // Names must be one word and begin with an uppcase letter.
+  // No punctuation is allowed.
   string name = 2;
 
   // The age of the dog in years.
   uint32 age = 3;
 
-   // The breed of the dog.
-   Breed breed = 4;
+  // The breed of the dog.
+  Breed breed = 4;
 
-   // The date the dog was born.
-   google.type.Date birth_date = 5;
+  // The date the dog was born.
+  google.type.Date birth_date = 5;
 
-   // The price of the dog in US dollars.
-   google.type.Money dog_price = 6;
+  // The price of the dog in US dollars.
+  google.type.Money dog_price = 6;
 
-   // Optional. A list representing the dogs favorite toys.
-   repeated string favorite_toys = 7;
+  // Optional. A list representing the dogs favorite toys.
+  repeated string favorite_toys = 7;
 
-   // A public url containing an image of the dog.
-   string profile_image_url = 8;
+  // A public url containing an image of the dog.
+  string profile_image_url = 8;
 
-   // Whether the dog has received all required vaccines.
-   bool is_vaccinated = 9;
+  // Whether the dog has received all required vaccines.
+  bool is_vaccinated = 9;
 
-   // The weight of the dog in pounds.
-   float weight = 10;
+  // The weight of the dog in pounds.
+  float weight = 10;
 
-   // The information on the dogs collar.
-   oneof collar_information {
-     // The street address of the store in US format.
-     google.type.PhoneNumber PostalAddress = 11;
+  // The information on the dogs collar.
+  oneof collar_information {
+    // The street address of the store in US format.
+    google.type.PostalAddress postal_address = 11;
 
-     // The phone number of the store in US format.
+    // The phone number of the store in US format.
     google.type.PhoneNumber store_phone_number = 12;
- }
+  }
+
+  // The foods the dog likes along with the associated cost in dollars. 
+  map<string, google.type.Money> favorite_foods_with_price = 13;
 }
