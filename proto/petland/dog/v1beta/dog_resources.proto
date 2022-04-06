@@ -5,7 +5,10 @@
 // finch - finch@petland.com
 
 syntax = "proto3";
+
 package petland.dog.v1beta;
+
+import "google/type/date.proto";
 
 enum Breed {
     // The user did not specify the breed. Do not use.
@@ -45,4 +48,31 @@ message Dog {
 
    // The breed of the dog.
    Breed breed = 4;
+
+   // The date the dog was born.
+   google.type.Date birth_date = 5;
+
+   // The price of the dog in US dollars.
+   google.type.Money dog_price = 6;
+
+   // Optional. A list representing the dogs favorite toys.
+   repeated string favorite_toys = 7;
+
+   // A public url containing an image of the dog.
+   string profile_image_url = 8;
+
+   // Whether the dog has received all required vaccines.
+   bool is_vaccinated = 9;
+
+   // The weight of the dog in pounds.
+   float weight = 10;
+
+   // The information on the dogs collar.
+   oneof collar_information {
+     // The street address of the store in US format.
+     google.type.PhoneNumber PostalAddress = 11;
+
+     // The phone number of the store in US format.
+    google.type.PhoneNumber store_phone_number = 12;
+ }
 }
