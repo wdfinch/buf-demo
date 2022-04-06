@@ -1,2 +1,29 @@
-// The dog api is used to tranfer and modify information about dogs at petland.
-// Dogs no longer at petland will not be accesible via the API.
+// current maintainers:
+// Finch - finch@petland.com
+
+syntax = "proto3";
+
+package petland.dog.v1beta;
+
+import "petland/dog/v1beta/dog_resources.proto";
+import "petland/tracing/v1/tracing.proto";
+
+// The DogApi allows users to view and modify information about dogs at petland.
+// Dogs no longer at petland will not be accesible via the API. 
+service DogApiService {
+  // Gets information about a specific dog
+  rpc GetDog (GetDogRequest) returns (GetDogResponse) {}
+}
+
+// Request to retrieve a specifc dog.
+message GetDogRequest {
+    // The id of the dog to retrieve.
+    uint32 dog_id = 1;
+    petland.tracing.v1.Trace trace = 2;
+    petland.dog.v1beta.Dog dog = 3;
+  }
+
+// Request to retrieve a specifc dog.
+message GetDogResponse {
+    petland.tracing.v1.Trace trace = 1;
+  }

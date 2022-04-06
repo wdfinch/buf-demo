@@ -1,5 +1,5 @@
 // The messages in this file describe the interfaces used in the dog api.
-// See dog_resources for more details regarding the api.
+// See dog_api for more details regarding the api.
 
 // current maintainers:
 // Finch - finch@petland.com
@@ -38,8 +38,8 @@ enum Breed {
 
 // A dog message contains all the information related to a dog at pet land.
 message Dog {
-  // The unique id of the dog represented as v4 uuid.
-  string id = 1;
+  // The unique id of the dog.
+  uint32 id = 1;
 
   // The name of the dog. Note this is not unique.
   // Names must be one word and begin with an uppcase letter.
