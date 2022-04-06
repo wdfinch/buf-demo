@@ -1,0 +1,48 @@
+// The messages in this file describe the interfaces used in the dog api.
+// See dog_resources for more details regarding the api. 
+
+// current maintainers:
+// finch - finch@petland.com
+
+syntax = "proto3";
+package petland.dog.v1beta;
+
+enum Breed {
+    // The user did not specify the breed. Do not use.
+    BREED_UNSPECIFIED = 0;
+
+    // The golden retriever dog breed.
+    BREED_GOLDEN_RETRIEVER = 1;
+
+    // The grey hound dog breed.
+    BREED_GREYHOUND = 2;
+
+    // The flat coated retriever dog breed.
+    BREED_FLAT_COATED_RETRIEVER = 3;
+
+    // The pug dog breed.
+    BREED_PUG = 4;
+
+    // The bull dog breed.
+    BREED_BULLDOG = 5;
+
+    // An unknow dog breed.
+    BREED_UNKNOWN = 6;
+}
+
+// A dog message contains all the information related to a dog at pet land.
+message Dog {
+  // The unique id of the dog represented as v4 uuid.
+  string id = 1;
+
+  // The name of the dog. Note this is not unique.
+  // Names must be one word and begin with an uppcase letter. 
+  // No punctuation is allowed. 
+  string name = 2;
+
+  // The age of the dog in years.
+  uint32 age = 3;
+
+   // The breed of the dog.
+   Breed breed = 4;
+}
