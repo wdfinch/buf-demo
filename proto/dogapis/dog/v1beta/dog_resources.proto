@@ -6,12 +6,12 @@
 
 syntax = "proto3";
 
-package petland.dog.v1beta;
+package dog.v1beta;
 
 import "google/type/date.proto";
 import "google/type/money.proto";
-import "google/type/postal_address.proto";
 import "google/type/phone_number.proto";
+import "google/type/postal_address.proto";
 
 enum Breed {
   // The user did not specify the breed. Do not use.
@@ -79,6 +79,6 @@ message Dog {
     google.type.PhoneNumber store_phone_number = 12;
   }
 
-  // The foods the dog likes along with the associated cost in dollars. 
+  // The foods the dog likes along with the associated cost in dollars.
   map<string, google.type.Money> favorite_foods_with_price = 13;
 }
