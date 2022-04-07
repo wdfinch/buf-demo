@@ -6,13 +6,14 @@
 
 syntax = "proto3";
 
-package dog.v1beta;
+package petland.dog.v1;
 
 import "google/type/date.proto";
 import "google/type/money.proto";
 import "google/type/phone_number.proto";
 import "google/type/postal_address.proto";
 
+// The breed of the dog. If the breed is unknown, use the final option.
 enum Breed {
   // The user did not specify the breed. Do not use.
   BREED_UNSPECIFIED = 0;

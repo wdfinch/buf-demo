@@ -3,10 +3,10 @@
 
 syntax = "proto3";
 
-package dog.v1beta;
+package petland.dog.v1;
 
-// import "dogapis/v1beta/dog_resources.proto";
-// import "petland/traceing/v1/tracing.proto";
+import "petland/dog/v1/dog_resources.proto";
+import "petland/tracing/v1/tracing.proto";
 
 // The DogApi allows users to view and modify information about dogs at petland.
 // Dogs no longer at petland will not be accesible via the API.
@@ -19,11 +19,11 @@ service DogApiService {
 message GetDogRequest {
   // The id of the dog to retrieve.
   uint32 dog_id = 1;
-  // tracingapis.v1.Trace trace = 2;
-  // petland.dog.v1beta.Dog dog = 3;
+  petland.tracing.v1.Trace trace = 2;
+  petland.dog.v1.Dog dog = 3;
 }
 
 // Request to retrieve a specifc dog.
 message GetDogResponse {
-  // petland.tracing.v1.Trace trace = 1;
+  petland.tracing.v1.Trace trace = 1;
 }

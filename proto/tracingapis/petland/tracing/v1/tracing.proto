@@ -5,7 +5,7 @@
 
 syntax = "proto3";
 
-package tracing.v1;
+package petland.tracing.v1;
 
 import "google/type/datetime.proto";
 
