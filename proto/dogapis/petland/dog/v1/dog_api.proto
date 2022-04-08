@@ -3,15 +3,36 @@
 
 syntax = "proto3";
 
+// v1 dog api rpcs and messages
 package petland.dog.v1;
 
 import "petland/dog/v1/dog_resources.proto";
 import "petland/tracing/v1/tracing.proto";
 
+// The dog api contains all messages and rpc related to modifying and viewing
+// dog related information at petland. A few important notes.
+// 1. Dogs no longer at petland will not appear in our apis.
+// 2. Limited dog breeds are supported. New breeds can be suggested to finch@petland.com.
+// 3. All rate limiting rules apply.
+// 4. All organization specific rpcs require validation.
+//
+// We also supply a REST api for non grpc users.
+// ```
+// # get a dog by id
+// GET https://petland.com/dogs/{pet_id} 
+//   HTTP 1.1 body -> empty
+//   HTTP 1.1 resp -> GetDogRequest
+// ```
+//*note all api usage must comply with our terms of use and privacy policy*
+//
 // The DogApi allows users to view and modify information about dogs at petland.
 // Dogs no longer at petland will not be accesible via the API.
+// The following validation rules aply to all requests:
+// 1. All non REST requests must contain non empty bodys
+// 2. API tokens must be sent in the header a bearer token
+// 3. Only valid production URL will be accesible to external users (non petland employees)
 service DogApiService {
-  // Gets information about a specific dog
+  // Gets information about a specific dog. If the dog cannot be found a 404 error will be returned. 
   rpc GetDog(GetDogRequest) returns (GetDogResponse) {}
 }
 

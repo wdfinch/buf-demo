@@ -5,6 +5,8 @@
 
 syntax = "proto3";
 
+// This module contains standard tracing messages. These messages should
+// be added to all requests unless otherwise stated.
 package petland.tracing.v1;
 
 import "google/type/datetime.proto";

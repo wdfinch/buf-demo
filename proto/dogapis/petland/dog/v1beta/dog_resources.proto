@@ -1,9 +1,3 @@
-// The messages in this file describe the interfaces used in the dog api.
-// See dog_api for more details regarding the api.
-
-// current maintainers:
-// Finch - finch@petland.com
-
 syntax = "proto3";
 
 package petland.dog.v1beta;
