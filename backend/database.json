@@ -1,24 +1,27 @@
 {
-  "id": 1,
-  "name": "Spike",
-  "age": 4,
-  "breed": "GOLDEN_RETRIEVER",
-  "birthDate": 1523231793,
-  "dogPrice": 10000,
-  "favoriteToys": [
-    "squeaky ball",
-    "rubber bone",
-    "stuffed squirrel"
-  ],
-  "profileImageUrl": "https://source.unsplash.com/KFJuCzJiQYU",
-  "isVaccinated": true,
-  "weight": 65,
-  "postalAddress": "1734 Jim Rosa Lane, San Francisco, CA, 94104",
-  "favoriteFoodsWithPrice": {
-    "peanutButter": 600,
-    "steak": 1200,
-    "chicken": 800,
-    "salmon": 1000
-  }
+  "dogs": [
+    {
+      "id": 1,
+      "name": "Spike",
+      "age": 4,
+      "breed": "GOLDEN_RETRIEVER",
+      "birthDate": 1523231793,
+      "dogPrice": 10050,
+      "favoriteToys": [
+        "squeaky ball",
+        "rubber bone",
+        "stuffed squirrel"
+      ],
+      "profileImageUrl": "https://source.unsplash.com/KFJuCzJiQYU",
+      "isVaccinated": true,
+      "weight": 65.45,
+      "postalAddress": "1734 Jim Rosa Lane, San Francisco, CA, 94104",
+      "favoriteFoodsWithPrice": {
+        "peanutButter": 600,
+        "steak": 1200,
+        "chicken": 800,
+        "salmon": 1000
+      }
+    }
+  ]
 }
-

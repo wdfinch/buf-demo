@@ -3,7 +3,7 @@ module petland.com/server
 go 1.18
 
 require (
-	go.buf.build/grpc/go/petland/dogapis v1.3.24
+	go.buf.build/grpc/go/petland/dogapis v1.3.25
 	google.golang.org/grpc v1.45.0
 )
 

@@ -6,45 +6,67 @@ import (
 	"fmt"
 	"go.buf.build/grpc/go/petland/dogapis/petland/dog/v1"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"io/ioutil"
 	"log"
 	"net"
 )
 
 var (
-	port = 50052
+	port = 50051
 )
 
-type Database struct {
-	Id                     int            `json:"id"`
+type Dog struct {
+	Id                     uint32         `json:"id"`
 	Name                   string         `json:"name"`
-	Age                    int            `json:"age"`
+	Age                    uint32         `json:"age"`
 	Breed                  string         `json:"breed"`
 	BirthDate              int            `json:"birthDate"`
 	DogPrice               int            `json:"dogPrice"`
 	FavoriteToys           []string       `json:"favoriteToys"`
 	ProfileImageUrl        string         `json:"profileImageUrl"`
 	IsVaccinated           bool           `json:"isVaccinated"`
-	Weight                 int            `json:"weight"`
+	Weight                 float32        `json:"weight"`
 	PostalAddress          string         `json:"postalAddress"`
 	FavoriteFoodsWithPrice map[string]int `json:"favoriteFoodsWithPrice"`
+}
+
+type Database struct {
+	Dogs []Dog `json:"dogs"`
 }
 
 type Server struct {
 	dogv1.UnimplementedDogApiServiceServer
 }
 
-func (cs *Server) GetDog(ctx context.Context, req *dogv1.GetDogRequest) (*dogv1.GetDogResponse, error) {
-	cRes := &dogv1.GetDogResponse{}
-	fmt.Println("hello")
-	return cRes, nil
-}
-
-func main() {
+func getDatabase() Database {
 	file, _ := ioutil.ReadFile("database.json")
 	database := Database{}
 	_ = json.Unmarshal(file, &database)
+	return database
+}
 
+func (cs *Server) GetDog(ctx context.Context, req *dogv1.GetDogRequest) (*dogv1.GetDogResponse, error) {
+	database := getDatabase()
+	var dog *Dog = nil
+	for _, d := range database.Dogs {
+		if d.Id == req.DogId {
+			dog = &d
+		}
+	}
+
+	if dog == nil {
+		err := status.Error(codes.NotFound, "No dog was found with the supplied ID")
+		return nil, err
+	}
+
+	cRes := GetResp(dog)
+
+	return &cRes, nil
+}
+
+func main() {
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s%d", ":", port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)

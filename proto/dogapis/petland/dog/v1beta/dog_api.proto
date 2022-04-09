@@ -37,11 +37,14 @@ service DogApiService {
 message GetDogRequest {
   // The id of the dog to retrieve.
   uint32 dog_id = 1;
+  // Standard tracing information
   petland.tracing.v1.Trace trace = 2;
-  petland.dog.v1beta.Dog dog = 3;
 }
 
 // Request to retrieve a specifc dog.
 message GetDogResponse {
-  petland.tracing.v1.Trace trace = 1;
+  // The dog message to return.
+  petland.dog.v1beta.Dog dog = 1;
+  // Standard tracing information.
+  petland.tracing.v1.Trace trace = 2;
 }
