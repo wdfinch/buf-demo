@@ -22,7 +22,7 @@
 <div class="container">
     <div class="innerContainer">
         <h1>Buf Demo</h1>
-        <p>Search for a &#128021; at petland to get started</p>
+        <p>Search for a &#128021; at petland to get started.</p>
         <div>
             <input type=number min=0 max=max bind:value={id} on:input={isInputValid = null} placeholder="Dog id"/>
             <button on:click={handleSearch}>Search</button>

@@ -2,6 +2,7 @@ package main
 
 import (
 	dogv1 "go.buf.build/grpc/go/petland/dogapis/petland/dog/v1"
+	tracingv1 "go.buf.build/grpc/go/petland/tracingapis/petland/tracing/v1"
 	date "google.golang.org/genproto/googleapis/type/date"
 	"google.golang.org/genproto/googleapis/type/money"
 	"google.golang.org/genproto/googleapis/type/postaladdress"
@@ -84,6 +85,9 @@ func GetResp(dog *Dog) dogv1.GetDogResponse {
 			Weight:                 dog.Weight,
 			CollarInformation:      getPostalAddress(dog.PostalAddress),
 			FavoriteFoodsWithPrice: getFavoriteFoods(dog.FavoriteFoodsWithPrice),
+		},
+		Trace: &tracingv1.Trace{
+			TraceId: "v1",
 		},
 	}
 }
