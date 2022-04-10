@@ -353,6 +353,10 @@
 
         div, p, h1 {font-family: Arial}
 
+        div {
+            font-size: 1.6rem;
+        }
+
         h1 {
             margin: 0;
             font-size: 4.5rem;
