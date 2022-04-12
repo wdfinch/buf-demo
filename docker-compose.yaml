@@ -2,7 +2,7 @@ version: "3"
 services:
   backend:
     image: "petland/backend:latest"
-    container_name: "backend"
+    hostname: "backend"
     build: ./backend
     ports:
       - "50051:50051"
@@ -11,3 +11,8 @@ services:
     build: ./envoy
     ports:
       - "8080:8080"
+  frontend:
+    image: "petland/frontend:latest"
+    build: ./frontend
+    ports:
+      - "3000:3000"
