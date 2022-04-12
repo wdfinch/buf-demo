@@ -29,6 +29,9 @@
   },
   "type": "module",
   "dependencies": {
-    "@buf/grpc_web_petland_dogapis": "^1.2.25"
+    "@buf/grpc_web_googleapis_googleapis": "1.2.661",
+    "@buf/grpc_web_petland_dogapis": "^1.2.25",
+    "@buf/grpc_web_petland_tracingapis": "1.2.3",
+    "@zerodevx/svelte-json-view": "^0.2.0"
   }
 }

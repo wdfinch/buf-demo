@@ -1,16 +1,39 @@
 <script lang="ts">
-    import Normalize from './Normalize.svelte';
+    import Normalize from './Normalize.svelte'
+    import Response from './Response.svelte'
 
-    let id: number | null = 0;
+    import {
+        DogApiServicePromiseClient
+    } from '@buf/grpc_web_petland_dogapis/petland/dog/v1/dog_api_grpc_web_pb'
+    import {GetDogRequest} from '@buf/grpc_web_petland_dogapis/petland/dog/v1/dog_api_pb'
+
+    let id: number | null = 1
     let isInputValid: boolean | null = null
     const max = 10000
+    let getDogPromise
+
+    async function getDog() {
+        const client = new DogApiServicePromiseClient('http://localhost:8080')
+        const req = new GetDogRequest()
+        req.setDogId(id)
+        const resp = await client.getDog(req)
+        if (resp) {
+            return resp.toObject()
+        } else {
+            console.log('sdf')
+            throw new Error()
+        }
+
+    }
 
     function handleSearch() {
         if (!Number.isInteger(id) || id > max) {
             isInputValid = false
+            return
         }
-    }
 
+        getDogPromise = getDog()
+    }
 </script>
 
 <Normalize/>
@@ -31,6 +54,17 @@
                 <div class="error">ID must be an integer less than {max}</div>
             {/if}
         </div>
+
+        {#await getDogPromise}
+            <p>...loading</p>
+        {:then apiResponse}
+            {#if apiResponse}
+                <Response resp={apiResponse}/>
+            {/if}
+        {:catch error}
+            <p class="error" style="color: red">{error.message}</p>
+        {/await}
+
     </div>
 </div>
 
@@ -44,7 +78,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
   }
 
   h1 {

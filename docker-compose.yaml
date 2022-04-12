@@ -1,0 +1,13 @@
+version: "3"
+services:
+  backend:
+    image: "petland/backend:latest"
+    container_name: "backend"
+    build: ./backend
+    ports:
+      - "50051:50051"
+  envoy:
+    image: "petland/envoy:latest"
+    build: ./envoy
+    ports:
+      - "8080:8080"

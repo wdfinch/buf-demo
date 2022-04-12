@@ -4,13 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"go.buf.build/grpc/go/petland/dogapis/petland/dog/v1"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 	"io/ioutil"
 	"log"
 	"net"
+
+	dogv1 "go.buf.build/grpc/go/petland/dogapis/petland/dog/v1"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 var (
@@ -48,6 +49,7 @@ func getDatabase() Database {
 }
 
 func (cs *Server) GetDog(ctx context.Context, req *dogv1.GetDogRequest) (*dogv1.GetDogResponse, error) {
+	fmt.Println("processing qequest")
 	database := getDatabase()
 	var dog *Dog = nil
 	for _, d := range database.Dogs {
@@ -61,7 +63,7 @@ func (cs *Server) GetDog(ctx context.Context, req *dogv1.GetDogRequest) (*dogv1.
 		return nil, err
 	}
 
-	cRes := GetResp(dog)
+	cRes := getResp(dog)
 
 	return &cRes, nil
 }

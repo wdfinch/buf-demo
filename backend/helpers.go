@@ -1,9 +1,11 @@
 package main
 
 import (
+	uuid "github.com/google/uuid"
 	dogv1 "go.buf.build/grpc/go/petland/dogapis/petland/dog/v1"
 	tracingv1 "go.buf.build/grpc/go/petland/tracingapis/petland/tracing/v1"
 	date "google.golang.org/genproto/googleapis/type/date"
+	"google.golang.org/genproto/googleapis/type/datetime"
 	"google.golang.org/genproto/googleapis/type/money"
 	"google.golang.org/genproto/googleapis/type/postaladdress"
 	"strings"
@@ -70,7 +72,19 @@ func getFavoriteFoods(favoriteFoods map[string]int) map[string]*money.Money {
 	return m
 }
 
-func GetResp(dog *Dog) dogv1.GetDogResponse {
+func getCurrentTime() *datetime.DateTime {
+	tm := time.Now()
+	return &datetime.DateTime{
+		Year:    int32(tm.Year()),
+		Month:   int32(tm.Month()),
+		Day:     int32(tm.Day()),
+		Hours:   int32(tm.Hour()),
+		Minutes: int32(tm.Minute()),
+		Seconds: int32(tm.Second()),
+	}
+}
+
+func getResp(dog *Dog) dogv1.GetDogResponse {
 	return dogv1.GetDogResponse{
 		Dog: &dogv1.Dog{
 			Id:                     dog.Id,
@@ -87,7 +101,9 @@ func GetResp(dog *Dog) dogv1.GetDogResponse {
 			FavoriteFoodsWithPrice: getFavoriteFoods(dog.FavoriteFoodsWithPrice),
 		},
 		Trace: &tracingv1.Trace{
-			TraceId: "v1",
+			TraceId:   uuid.NewString(),
+			Timestamp: getCurrentTime(),
+			Attempts:  1,
 		},
 	}
 }
