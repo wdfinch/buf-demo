@@ -81,5 +81,5 @@ message Dog {
   }
 
   // The foods the dog likes along with the associated cost in dollars.
-  map<string, google.type.Money> favorite_foods_with_price = 13;  
+  map<string, google.type.Money> favorite_foods_with_price = 13;
 }
